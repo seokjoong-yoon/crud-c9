@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class='writing'>
+  <div class="alert alert-primary" role="alert">
+    <a class = 'goandwrite' href="{% url 'new' %}">글쓰러가기</a>
+  </div>
+</section>
+
+<section class='clubs'>
+  <header class='club_header'>
+    <h1 class='club_title'>
+      <span class='club_category'>글목록</span>
+    </h1>
+  </header>
+
+  <div class='container'>
+      <div class='row'>
+        {% for post in posts %}
+          <div class='col-lg-6 col-sm-12'>
+            <div class="card">
+              <img src="{% static 'blog/images/babylion.jpg' %}" class="card-img-top" alt="">
+              
+              <div class="card-body">
+                {% if post.category == 'public' %}
+                  <h5 class="card-title">
+                    <h3>{{post.title}}</h3>
+                  </h5>
+                  <p class="card-text">
+                    {{post.pub_date}} {{post.writer}}
+                    {{post.category}}
+                    {{post.body|linebreaks}}
+                  </p>
+                  <a href="{% url 'post_detail' index=post.pk %}" class="btn btn-warning text-white">자세히보기</a>
+                {% else %}
+                  <h5 class='card-title'>
+                    <h3> 비밀글입니다 </h3>
+                  </h5>
+                  <p class='card-text'>
+                    {{post.pub_date}}
+                    {{post.category}}
+                  </p>
+                  <a href = "{% url 'post_detail' index=post.pk %}" class="btn btn-warning text-white">자세히보기</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  
+</section>
+
+
+
+{% endblock %}

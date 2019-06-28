@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+
+<div class="post">
+    {% if post.pub_date %}
+        <div class="date">
+            {{ post.pub_date }}
+        </div>
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.category }}</h3>
+    <p>{{ post.body|linebreaks }}</p>  
+    
+    {% if post.image %}
+        <img src = "{{ post.image.url }}" height = 200>
+    {% endif %}
+
+    <a href="{% url 'post_edit' index=post.pk %}">수정하기</a>
+    <a href="{% url 'post_delete' index=post.pk %}">삭제하기</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class='newdraft'>
+    <div class = "square">
+        <h1>새 글 쓰기</h1>
+        
+        <form method = "POST" class = "post-form" enctype="multipart/form-data"> {% csrf_token %}
+            {{ form.as_p }}
+            <button type = 'submit'>Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
